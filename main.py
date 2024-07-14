@@ -1,31 +1,45 @@
 import pygame
 import sys
 from constants import *
+from snake import Snake
+from food import Food
 
-# Инициализация Pygame
-pygame.init()
-
-# Создание игрового окна
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Snake Game")
-
-# Создание объекта часов для управления FPS
-clock = pygame.time.Clock()
+# ... (предыдущий код остается без изменений)
 
 
 def main():
+    snake = Snake()
+    food = Food()
+
     running = True
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:
+                    snake.change_direction((0, -GRID_SIZE))
+                elif event.key == pygame.K_DOWN:
+                    snake.change_direction((0, GRID_SIZE))
+                elif event.key == pygame.K_LEFT:
+                    snake.change_direction((-GRID_SIZE, 0))
+                elif event.key == pygame.K_RIGHT:
+                    snake.change_direction((GRID_SIZE, 0))
 
-        # Здесь будет обновление игрового состояния
+        # Обновление состояния игры
+        snake.move()
+
+        # Проверка столкновения с едой
+        if snake.body[0] == food.position:
+            snake.grow()
+            food = Food()
 
         # Очистка экрана
         screen.fill(BLACK)
 
-        # Здесь будет отрисовка игровых объектов
+        # Отрисовка игровых объектов
+        snake.draw(screen)
+        food.draw(screen)
 
         # Обновление экрана
         pygame.display.flip()
