@@ -21,6 +21,10 @@ class Snake:
         elif new_head[1] >= SCREEN_HEIGHT:
             new_head = (new_head[0], 0)
 
+        # Проверка на столкновение с собственным телом
+        if new_head in self.body:
+            raise Exception("Game Over")
+
         self.body = [new_head] + self.body[:-1]
 
     def grow(self):
