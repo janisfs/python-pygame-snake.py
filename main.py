@@ -1,6 +1,7 @@
 import pygame
 import sys
 from snake import Snake
+from food import Food
 from constants import *
 
 
@@ -11,6 +12,7 @@ def main():
 
     clock = pygame.time.Clock()
     snake = Snake()
+    food = Food()
 
     running = True
     while running:
@@ -33,8 +35,14 @@ def main():
             print(e)
             running = False
 
+        # Проверка на столкновение змейки с едой
+        if snake.body[0] == food.position:
+            snake.grow()
+            food.respawn()
+
         screen.fill(BLACK)
         snake.draw(screen)
+        food.draw(screen)
         pygame.display.flip()
         clock.tick(10)
 
