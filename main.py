@@ -8,6 +8,12 @@ from food import Food
 
 
 def main():
+    pygame.init()
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    pygame.display.set_caption("Snake Game")
+    clock = pygame.time.Clock()
+
+    # Инициализация игровых объектов
     snake = Snake()
     food = Food()
 
