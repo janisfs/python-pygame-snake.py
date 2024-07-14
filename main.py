@@ -12,6 +12,7 @@ pygame.display.set_caption("Snake Game")
 # Создание объекта часов для управления FPS
 clock = pygame.time.Clock()
 
+
 def main():
     running = True
     while running:
@@ -34,6 +35,7 @@ def main():
 
     pygame.quit()
     sys.exit()
+
 
 if __name__ == "__main__":
     main()
