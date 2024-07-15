@@ -3,6 +3,7 @@ import sys
 from snake import Snake
 from food import Food
 from constants import *
+import time
 
 
 def main():
@@ -13,6 +14,8 @@ def main():
     clock = pygame.time.Clock()
     snake = Snake()
     food = Food()
+    score = 0
+    start_time = time.time()
 
     running = True
     while running:
@@ -43,6 +46,15 @@ def main():
         screen.fill(BLACK)
         snake.draw(screen)
         food.draw(screen)
+
+        # Отображение счётчика времени и продуктов
+        font = pygame.font.Font(None, 36)
+        elapsed_time = time.time() - start_time
+        time_text = font.render(f"Time: {int(elapsed_time)}s", True, WHITE)
+        score_text = font.render(f"Score: {score}", True, WHITE)
+        screen.blit(time_text, (10, 10))
+        screen.blit(score_text, (10, 50))
+
         pygame.display.flip()
         clock.tick(10)
 
